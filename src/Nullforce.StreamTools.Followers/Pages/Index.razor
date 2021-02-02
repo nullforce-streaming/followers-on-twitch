@@ -1,4 +1,15 @@
 @page "/"
-<h1>Hello, world!</h1>
+@using Nullforce.StreamTools.Followers.Followers;
 
-<LoginComponent />
+<AuthorizeView>
+    <Authorized>
+        <h1>@context.User.Identity.Name's Followers</h1>
+
+        <FollowersComponent />
+    </Authorized>
+
+    <NotAuthorized>
+        <h1>Please sign in to view your followers</h1>
+        <a href="/auth/signin-twitch">Sign in with Twitch</a>
+    </NotAuthorized>
+</AuthorizeView>

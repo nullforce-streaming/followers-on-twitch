@@ -1,0 +1,36 @@
+﻿@using Nullforce.StreamTools.Followers
+@inject FollowersService FollowersService
+ 
+@if (followers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Follower</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var follower in followers)
+            {
+                <tr>
+                    <td>@follower.Followed</td>
+                    <td>@follower.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Followers[] followers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        followers = await FollowersService.GetFollowersAsync();
+    }
+}
