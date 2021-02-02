@@ -1,0 +1,12 @@
+﻿<AuthorizeView>
+    <Authorized>
+        Hello, @context.User.Identity.Name!
+        <form method="post" action="auth/signout">
+            <button type="submit" class="nav-link btn btn-link">Sign Out</button>
+        </form>
+    </Authorized>
+
+    <NotAuthorized>
+        <a href="/auth/signin-twitch">Sign in with Twitch</a>
+    </NotAuthorized>
+</AuthorizeView>

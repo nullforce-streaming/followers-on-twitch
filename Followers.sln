@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BD3F6915-1B98-45BD-997B-3225B22CBDE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nullforce.StreamTools.Followers", "src\Nullforce.StreamTools.Followers\Nullforce.StreamTools.Followers.csproj", "{A59CC486-4532-47CB-8AE5-F38BB20924FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nullforce.StreamTools.Followers", "src\Nullforce.StreamTools.Followers\Nullforce.StreamTools.Followers.csproj", "{A59CC486-4532-47CB-8AE5-F38BB20924FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BEDCA384-A9FF-4716-8D5E-69C2C62B1C42}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{A59CC486-4532-47CB-8AE5-F38BB20924FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -33,7 +35,13 @@ Global
 		{A59CC486-4532-47CB-8AE5-F38BB20924FA}.Release|x86.ActiveCfg = Release|Any CPU
 		{A59CC486-4532-47CB-8AE5-F38BB20924FA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A59CC486-4532-47CB-8AE5-F38BB20924FA} = {BD3F6915-1B98-45BD-997B-3225B22CBDE5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDFE1F05-AD92-4D00-B080-DBE39A436F0E}
 	EndGlobalSection
 EndGlobal

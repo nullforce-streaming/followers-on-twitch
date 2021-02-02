@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>f01f674c-2cb1-4872-a798-a7d5f366d8e8</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.Twitch" Version="5.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.2" />
+  </ItemGroup>
 
 </Project>
