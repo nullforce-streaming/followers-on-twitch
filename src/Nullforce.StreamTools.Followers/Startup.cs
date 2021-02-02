@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Nullforce.StreamTools.Followers.Auth;
 using Nullforce.StreamTools.Followers.Followers;
 
 namespace Nullforce.StreamTools.Followers
@@ -38,7 +39,9 @@ namespace Nullforce.StreamTools.Followers
                     options.SaveTokens = true;
                 });
 
-            services.AddSingleton<FollowersService>();
+            services.AddHttpClient();
+            services.AddScoped<TokenProvider>();
+            services.AddScoped<FollowersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

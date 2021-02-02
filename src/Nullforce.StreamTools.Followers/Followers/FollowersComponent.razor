@@ -1,36 +1,49 @@
-﻿@using Nullforce.StreamTools.Followers
+﻿@using Nullforce.StreamTools.Followers.Auth
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject FollowersService FollowersService
- 
-@if (followers == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Follower</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var follower in followers)
-            {
-                <tr>
-                    <td>@follower.Followed</td>
-                    <td>@follower.Name</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+
+<AuthorizeView>
+    <Authorized>
+        @if (followers == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <h1>@context.User.Identity.Name's Most Recent Followers</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Follower</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var follower in followers)
+                    {
+                        <tr>
+                            <td>@follower.Followed</td>
+                            <td>@follower.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </Authorized>
+</AuthorizeView>
 
 @code {
+    [Parameter]
+    public InitialApplicationState InitialState { get; set; }
+
     private Followers[] followers;
 
     protected override async Task OnInitializedAsync()
     {
-        followers = await FollowersService.GetFollowersAsync();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var claim = authState.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+        var userid = claim.Value;
+        followers = await FollowersService.GetFollowersAsync(userid);
     }
 }

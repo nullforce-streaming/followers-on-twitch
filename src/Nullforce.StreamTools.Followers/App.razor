@@ -1,4 +1,7 @@
-﻿<CascadingAuthenticationState>
+﻿@using Nullforce.StreamTools.Followers.Auth
+@inject TokenProvider TokenProvider
+
+<CascadingAuthenticationState>
     <Router AppAssembly="@typeof(Program).Assembly" PreferExactMatches="@true">
         <Found Context="routeData">
             <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
@@ -10,3 +13,15 @@
         </NotFound>
     </Router>
 </CascadingAuthenticationState>
+
+@code {
+    [Parameter]
+    public InitialApplicationState InitialState { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        TokenProvider.AccessToken = InitialState.AccessToken;
+
+        return base.OnInitializedAsync();
+    }
+}

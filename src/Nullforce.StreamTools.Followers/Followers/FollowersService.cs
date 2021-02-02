@@ -1,11 +1,19 @@
-﻿using System;
+﻿using Flurl;
+using Flurl.Http;
+using Microsoft.Extensions.Configuration;
+using Nullforce.StreamTools.Followers.Auth;
+using System;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Nullforce.StreamTools.Followers.Followers
 {
     public class FollowersService
     {
+        private readonly IConfiguration _configuration;
+        private readonly TokenProvider _tokenProvider;
+
         private static readonly string[] Names = new[]
         {
             "Freezing",
@@ -20,16 +28,25 @@ namespace Nullforce.StreamTools.Followers.Followers
             "Scorching"
         };
 
-        public Task<Followers[]> GetFollowersAsync()
+        public FollowersService(IConfiguration configuration, TokenProvider tokenProvider)
         {
-            var rng = new Random();
-            var today = DateTime.Today;
+            _configuration = configuration;
+            _tokenProvider = tokenProvider;
+        }
 
-            return Task.FromResult(Enumerable.Range(1, 100).Select(index => new Followers
-            {
-                Followed = today.AddDays(-index),
-                Name = Names[rng.Next(Names.Length)] + Names[rng.Next(Names.Length)] + Names[rng.Next(Names.Length)],
-            }).ToArray());
+        public async Task<Followers[]> GetFollowersAsync(string userid)
+        {
+            var clientid = _configuration["Twitch:ClientId"];
+            var token = _tokenProvider.AccessToken;
+
+            var result = await "https://api.twitch.tv/helix/users/follows"
+                .SetQueryParam("to_id", userid)
+                .SetQueryParam("first", 100)
+                .WithHeader("Authorization", $"Bearer {token}")
+                .WithHeader("Client-ID", clientid)
+                .GetJsonAsync<FollowersWrapper>();
+
+            return result.Followers;
         }
     }
 }

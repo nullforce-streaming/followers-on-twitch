@@ -1,10 +1,8 @@
 @page "/"
-@using Nullforce.StreamTools.Followers.Followers;
+@using Nullforce.StreamTools.Followers.Followers
 
 <AuthorizeView>
     <Authorized>
-        <h1>@context.User.Identity.Name's Followers</h1>
-
         <FollowersComponent />
     </Authorized>
 
