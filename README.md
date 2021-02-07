@@ -15,7 +15,6 @@ You must provide a Twitch App Client ID and Secret by using either:
   - "Twitch:ClientId"
   - "Twitch:ClientSecret"
 
-
 ### Runtime
 
 - .NET 5

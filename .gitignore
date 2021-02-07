@@ -347,3 +347,5 @@ MigrationBackup/
 
 # NUKE Build
 output/
+
+.env
